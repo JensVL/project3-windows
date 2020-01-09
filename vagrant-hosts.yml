@@ -1,0 +1,131 @@
+# vagrant_hosts.yml
+#
+# List of hosts to be created by Vagrant. This file controls the Vagrant
+# settings, specifically host name and network settings. You should at least
+# have a `name:`.  Other optional settings that can be specified:
+#
+# * `box`: choose another base box instead of the default one specified in
+#          Vagrantfile. A box name in the form `USER/BOX` (e.g.
+#          `bertvv/centos72`) is fetched from Atlas.
+# * `box_url`: Download the box from the specified URL instead of from Atlas.
+# * `ip`: by default, an IP will be assigned by DHCP. If you want a fixed
+#         addres, specify it.
+# * `netmask`: by default, the network mask is `255.255.255.0`. If you want
+#              another one, it should be specified.
+# * `mac`: The MAC address to be assigned to the NIC. Several notations are
+#          accepted, including "Linux-style" (`00:11:22:33:44:55`) and
+#          "Windows-style" (`00-11-22-33-44-55`). The separator characters can
+#          be omitted altogether (`001122334455`).
+# * `intnet`: If set to `true`, the network interface will be attached to an
+#             internal network rather than a host-only adapter.
+# * `auto_config`: If set to `false`, Vagrant will not attempt to configure
+#                  the network interface.
+# * `synced_folders`: A list of dicts that specify synced folders. `src` and
+#   `dest` are mandatory, `options:` are optional. For the possible options,
+#   see the Vagrant documentation[1]. Keys of options should be prefixed with
+#   a colon, e.g. `:owner:`.
+#
+# To enable *provisioning*, add these hosts to site.yml and assign some roles.
+#
+# [1] http://docs.vagrantup.com/v2/synced-folders/basic_usage.html
+---
+
+- name: WIN-DC1
+  box: gusztavvargadr/windows-server
+  version: '1809.0.1910-standard'
+  ip: 192.168.100.10
+  lan_prefix: 24
+  intnet: true
+  gui: false
+  cpus: 2
+  memory: 2048
+  primary_dns: 192.168.100.10
+  secondary_dns: 192.168.100.20
+  default_gateway: 192.168.100.10
+  ip_win_sql_sccm: 192.168.100.30
+  ip_win_exc_shp: 192.168.100.40
+  domain: 'vanliefferinge.periode1'
+  netbios: 'VANLIEFFERINGE'
+  admin_pw: 'Admin2019'
+  debug_output: 'yes'
+  forwarded_ports:
+    - guest: '3389'
+      host: '3390'
+
+- name: WIN-DC2
+  box: gusztavvargadr/windows-server
+  version: '1809.0.1910-standard'
+  ip: 192.168.100.20
+  lan_prefix: 24
+  intnet: true
+  gui: false
+  cpus: 2
+  memory: 2048
+  hostname_dc1: WIN-DC1
+  primary_dns: 192.168.100.10
+  secondary_dns: 192.168.100.20
+  default_gateway: 192.168.100.10
+  domain: 'vanliefferinge.periode1'
+  netbios: 'VANLIEFFERINGE'
+  admin_pw: 'Admin2019'
+  debug_output: 'yes'
+  forwarded_ports:
+    - guest: '3389'
+      host: '3391'
+
+- name: WIN-SQL-SCCM
+  box: gusztavvargadr/windows-server
+  ip: 192.168.100.30
+  lan_prefix: 24
+  intnet: true
+  gui: false
+  cpus: 2
+  memory: 8192
+  primary_dns: 192.168.100.10
+  secondary_dns: 192.168.100.20
+  default_gateway: 192.168.100.10
+  domain: 'vanliefferinge.periode1'
+  domain_user: 'VANLIEFFERINGE\Administrator'
+  domain_pw: 'Admin2019'
+  sqlusername: 'VANLIEFFERINGE\Administrator'
+  sqlpassword: 'Admin2019'
+  debug_output: 'yes'
+  downloadpath: 'C:\SetupMedia'
+  forwarded_ports:
+    - guest: '3389'
+      host: '3393'
+
+- name: WIN-EXC-SHP
+  box: gusztavvargadr/windows-server
+  version: '1607.0.1909-standard'
+  ip: 192.168.100.40
+  lan_prefix: 24
+  intnet: true
+  gui: false
+  cpus: 2
+  memory: 8192
+  primary_dns: 192.168.100.10
+  secondary_dns: 192.168.100.20
+  default_gateway: 192.168.100.10
+  domain: 'vanliefferinge.periode1'
+  domain_user: 'VANLIEFFERINGE\Administrator'
+  domain_pw: 'Admin2019'
+  netbios: 'VANLIEFFERINGE'
+  debug_output: 'yes'
+  forwarded_ports:
+    - guest: '3389'
+      host: '3394'
+
+- name: WIN-CLT1
+  box: gusztavvargadr/windows-10
+  intnet: true
+  gui: true
+  cpus: 2
+  memory: 4096
+  domain: 'vanliefferinge.periode1'
+  domain_user: 'VANLIEFFERINGE\JensVL'
+  domain_pw: 'Admin2019'
+  debug_output: 'yes'
+  forwarded_ports:
+    - guest: '3389'
+      host: '3395'
