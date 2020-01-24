@@ -1,4 +1,4 @@
-# Script 2 for WIN-EXC-SHP
+# Script 2 for WIN-SQL-SCCM
 
 Write-Host "Joining domain..."
 

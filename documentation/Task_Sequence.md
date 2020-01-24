@@ -6,7 +6,7 @@
 
 ## Creating a boot image
 
-1. In the SCCM console, go to `Software Library > Overview > Operating images > Boot images`.
+1. In the SCCM console, go to `Software Library > Overview > Operating Systems > Boot images`.
 2. Open the context menu by pressing RMB on `boot images`.
 3. Select `Create Boot image using MDT`.
 4. Enter `\\WIN-SQL-SCCM\DeploymentShare\Boot` as path.

@@ -1,6 +1,6 @@
 # Script 6 for WIN-EXC-SHP
 
-$iso = "c:\scripts\officeserver.img"
+$iso = "c:\scripts\WIN-EXC-SHP\officeserver.img"
 
 Write-Host "Installing Sharepoint prereqs..."
 

@@ -35,7 +35,7 @@ install-ADDSDomainController -DomainName "vanliefferinge.periode1" -ReplicationS
 $domain = 'vanliefferinge.periode1'
 $dc1 = 'WIN-DC1'
 
-forest $domain $password $dc1
+#forest $domain $password $dc1
 
 Write-Host " Complete..."
 

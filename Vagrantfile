@@ -1,3 +1,4 @@
+# vagrantfile
 # -*- mode: ruby -*-
 # vi: ft=ruby :
 

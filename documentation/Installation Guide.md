@@ -5,7 +5,7 @@
 - If you get a WinRM error, execute `vagrant plugin install vagrant-reload` followed by `vagrant reload WIN-XXX`. Replace `WIN-XXX` with the servername.
   - If you continue getting the error, open the VM in VirtualBox.
   - Log in using `VANLIEFFERINGE\Administrator` as username and `Admin2019` as password.
-  - Browse to C`:\vagrant\provisioning\XXX`. Replace `XXX` with your servername.
+  - Browse to `C:\vagrant\provisioning\XXX`. Replace `XXX` with your servername.
   - Right-click the first script ande select `Edit`.
   - Press the green arrow at the top to run the script inside the VM.
   - Repeat this process for the other scripts.
@@ -52,6 +52,11 @@
 
 1. Execute `vagrant up WIN-DC2` in your vagrant directory.
 2. No additional steps are needed for this server. This server is now ready.
+
+- If adding to domain fails, set the domain manually
+- Reboot
+- After reboot, promote server to DC in existing domain
+
 3. Go back to the `WIN-DC1` installation guide to configure DHCP.
 
 ## Install WIN-SQL-SCCM

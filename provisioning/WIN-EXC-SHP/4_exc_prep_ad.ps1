@@ -2,7 +2,7 @@
 
 Write-Host "Preparing AD and schema..."
 
-$iso = "c:\scripts\ExchangeServer2016-x64-cu14.iso"
+$iso = "c:\scripts\WIN-EXC-SHP\ExchangeServer2016-x64-cu14.iso"
 
 #check for iso, if doesnt exist, download
 Write-Host "checking or downloading iso..."

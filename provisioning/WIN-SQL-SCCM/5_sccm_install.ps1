@@ -41,8 +41,13 @@ Write-Host 'Downloading MDT installer...'
 Write-Host 'Downloading Adobe Reader installer...'
 (New-Object System.Net.WebClient).DownloadFile("ftp://ftp.adobe.com/pub/adobe/reader/win/AcrobatDC/1500720033/AcroRdrDC1500720033_en_US.msi", "$downloadpath\AcroRdrDC1500720033_en_US.msi")
 
-Write-Host "Downloading win10 iso..."
-(New-Object System.Net.WebClient).DownloadFile("https://archive.org/download/Win10ConsumerEditionsv1809x86x64/en_windows_10_consumer_editions_version_1809_updated_dec_2018_x64_dvd_d7d23ac9.iso", "C:\scripts\WIN-SQL-SCCM\win10\Windows10_1809_Consumers_Edition.iso")
+if (!(Test-Path -path "C:\scripts\WIN-SQL-SCCM\win10\Windows10_1809.iso")) {
+  Write-Host "Downloading win10 iso..."
+  (New-Object System.Net.WebClient).DownloadFile("https://archive.org/download/Win10ConsumerEditionsv1809x86x64/en_windows_10_consumer_editions_version_1809_updated_dec_2018_x64_dvd_d7d23ac9.iso", "C:\scripts\WIN-SQL-SCCM\win10\Windows10_1809.iso")
+} else {
+  Write-Host "win10 iso present..."
+}
+
 
 # Install prereqs
 
@@ -210,7 +215,7 @@ Write-Host "PXE boot configured..."
 Write-Host "Copying win10 iso..."
 Copy-Item "C:\scripts\WIN-SQL-SCCM\win10" -Destination "C:\" -Recurse -Verbose
 
-Mount-DiskImage -ImagePath "C:\scripts\WIN-SQL-SCCM\win10\Windows10_1809_Consumers_Edition.iso"
+Mount-DiskImage -ImagePath "C:\scripts\WIN-SQL-SCCM\win10\Windows10_1809.iso"
 Write-Host "Copy and mount of iso complete..."
 Write-Host "Creating deployment share..."
 

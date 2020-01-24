@@ -79,7 +79,7 @@ A Proof Of Concept with 2 domaincontrollers, mailserver and server for automatic
 - Installation and configuration of an intranet site, not accessible from outside the network
 - Make sure the Active Directory Security Groups can use this site
 
-### 6. Windows Cliënt
+### 6. Windows Client
 
 - OS: Windows 10
 - Name: WIN-CLT1
